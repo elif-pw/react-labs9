@@ -2,6 +2,7 @@ import { EMPLOYEES_LOADED, ADD_EMPLOYEE } from './constants';
 
 export const initialState = {
   employees: [],
+  isLoaded: false
 };
 
 // Read this: https://redux.js.org/basics/reducers
@@ -11,12 +12,17 @@ const appReducer = (state = initialState, action) => {
     case EMPLOYEES_LOADED: {
       const { employees } = action.payload;
       // CAREFUL: You can't modify state variable directly.
-      return Object.assign({}, state, { employees });
+      return{
+        ... state,
+        employees,
+        isLoaded: true
+      }
     }
     case ADD_EMPLOYEE:{
+      const {employee}= action.payload;
       return{
         ...state,
-        employess:[...state.employees, action.payload.employee]
+        employees:[...state.employees, employee]
       }
     }
     default:
