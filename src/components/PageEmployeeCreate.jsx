@@ -1,7 +1,7 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-//import { addEmployee } from "../redux/actions";
+import { addEmployee } from "../redux/actions";
 
 
 class PageEmployeeCreate extends React.Component {
@@ -105,7 +105,7 @@ const mapStateToProps = (state /*, ownProps*/) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-   //addEmployee: employee=>dispatch(addEmployee(employee))
+   addEmployee: employee=>dispatch(addEmployee(employee))
 })
 
 export default connect(mapStateToProps,mapDispatchToProps)(withRouter(PageEmployeeCreate));
