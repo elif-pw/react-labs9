@@ -1,6 +1,6 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import { connect } from 'react-redux'
+import React from "react";
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import { employeesLoaded } from '../redux/actions'
 
@@ -38,7 +38,7 @@ class PageEmployeesList extends React.Component {
     if(isLoading) {
       return <p>Loading ...</p>
     }
-    
+
     return (
       <div>
         <h1>Employees List:</h1>
@@ -51,11 +51,11 @@ class PageEmployeesList extends React.Component {
   }
 }
 
-const mapStateToProps = (state /*, ownProps*/) => {
+const mapStateToProps = (state /* , ownProps*/) => {
   return {
     employees: state.employees,
-    isLoaded:state.isLoaded
-  }
+    isLoaded: state.isLoaded
+  };
 }
 
 const mapDispatchToProps = (dispatch) => ({
