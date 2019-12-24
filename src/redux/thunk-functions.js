@@ -12,7 +12,7 @@ export const fetchEmployees=()=>{
             .then(
                 employees=>dispatch(employeesLoaded(employees)),
                 error=>dispatch(fetchingEmployeesError(error))
-            )
-    }
+            );
+    };
 
-}
+};
