@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 //import { employeesLoaded } from '../redux/actions'
@@ -10,8 +10,7 @@ const EmployeeLine = ({ employee }) => <div>{employee.name} ({employee.age} yrs 
 class PageEmployeesList extends React.Component {
 
   // constructor(props) {
-  //   super(props);}
-
+  //   super(props);
   //   this.state = {
   //     isLoading: false,
   //   }
@@ -37,6 +36,7 @@ class PageEmployeesList extends React.Component {
     // const { isLoading } = this.state;
     const { employees } = this.props;
     const {isLoading}=this.props.isFetching;
+    const {user}=this.props ;
 
     if(isLoading) {
       return <p>Loading ...</p>
@@ -44,13 +44,26 @@ class PageEmployeesList extends React.Component {
 
     return (
       <div>
-        <h1>Employees List:</h1>
-        {employees && employees.map((employee => <EmployeeLine key={employee._id} employee={employee} />))}
-        <Link to="/new">
-          <button>Create employee</button>
-        </Link>
+        {user !== null ?
+            <div>
+              <div align="right">
+                <b> Logged in as {user.full_name} </b>
+              </div>
+              <h1>Employees List:</h1>
+              {employees && employees.map((employee => <EmployeeLine
+                  key={employee._id} employee={employee}/>))}
+              <Link to="/new">
+                <button>Create employee</button>
+              </Link>
+            </div> :
+            <div align="center">
+              <h1> Please login</h1>
+            </div>
+        }
+
       </div>
     );
+
   }
 }
 
@@ -58,16 +71,17 @@ const mapStateToProps = (state /* , ownProps*/) => {
   return {
     employees: state.employees,
     isLoaded: state.isLoaded,
-    isFetching: state.isFetching
+    isFetching: state.isFetching,
+    user: state.user
   };
-}
+};
 
 const mapDispatchToProps = (dispatch) => ({
   //employeesLoaded: employees => dispatch(employeesLoaded(employees))
   fetchEmployees: ()=> dispatch(fetchEmployees())
-})
+});
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(PageEmployeesList)
+)(withRouter(PageEmployeesList));

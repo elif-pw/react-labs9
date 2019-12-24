@@ -1,4 +1,6 @@
-import { EMPLOYEES_LOADED, ADD_EMPLOYEE, FETCHING_EMPLOYEES_ERROR, FETCHING_EMPLOYEES } from "./constants";
+import { EMPLOYEES_LOADED, ADD_EMPLOYEE,
+  FETCHING_EMPLOYEES_ERROR, FETCHING_EMPLOYEES,
+  LOGIN_FAIL, LOGIN_SUCCESS} from "./constants";
 
 export const employeesLoaded = employees => {
   return {
@@ -7,7 +9,7 @@ export const employeesLoaded = employees => {
       employees
     }
   };
-}
+};
 
 export const addEmployee = (employee) => {
   return {
@@ -16,7 +18,7 @@ export const addEmployee = (employee) => {
       employee
     }
   };
-}
+};
 
 export const fetchingEmployees=(employees)=>{
   return{
@@ -30,6 +32,22 @@ export const fetchingEmployeesError=(employees)=>{
     type: FETCHING_EMPLOYEES_ERROR,
     payload:{
       error
+    }
+  };
+};
+export const loginSuccess=user=>{
+  return {
+    type: LOGIN_SUCCESS,
+    payload:{
+      user
+    }
+  };
+};
+export const loginFail=name=>{
+  return {
+    type: LOGIN_FAIL,
+    payload:{
+      name
     }
   };
 };
